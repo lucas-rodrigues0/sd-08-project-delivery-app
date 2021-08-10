@@ -80,7 +80,7 @@ function SellerDetailPage(props) {
     <div>
       <NavBar userType="seller" userName={ userData.name } />
       <div className="Seller-details-container">
-        <div>
+        <div className="seller-details-status-nav">
           <span data-testid="seller_order_details__element-order-details-label-order-id">
             {order.id}
           </span>

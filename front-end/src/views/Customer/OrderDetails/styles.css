@@ -8,11 +8,11 @@
 
 .order-detail-status {
   align-items: center;
-  background-color: thistle;
-  border-radius: 5px;
+  background-color: lightgray;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19) , 0 6px 6px rgba(0, 0, 0, 0.23);
   display: flex;
   justify-content: space-between;
-  margin: 5px 0;
+  margin-top: 10px;
   padding: 5px;
   width: 80vw;
 }
@@ -22,7 +22,12 @@
 }
 
 .order-detail-button {
+  background-color: lightseagreen;
+  border: none;
+  border-radius: 5px;
   font-size: small;
+  height: 50px;
+  width: max-content;
 }
 
 .status-label {

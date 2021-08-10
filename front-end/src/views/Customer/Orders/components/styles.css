@@ -6,6 +6,11 @@
   width: 30vw;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .order-number {
   display: flex;
   flex-direction: column;

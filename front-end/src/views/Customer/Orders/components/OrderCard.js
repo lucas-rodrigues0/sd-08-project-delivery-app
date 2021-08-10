@@ -19,6 +19,12 @@ function OrderCard({ data }) {
   //   });
   // }, [socket, id]);
 
+  function statusColor() {
+    if (status === 'Pendente') return 'pendente';
+    if (status === 'entregue') return 'entregue';
+    return 'preparando';
+  }
+
   useEffect(() => {
     console.log('Execuet socket call');
     // socketCallBack();
@@ -32,31 +38,16 @@ function OrderCard({ data }) {
   return (
     <div className="main-wrapper-order">
       <div className="order-number">
-        <p>Pedido</p>
         <p
           data-testid={ `customer_orders__element-order-id-${data.id}` }
         >
           {`PEDIDO: ${data.id}`}
         </p>
-        <p
-          data-testid={ `customer_orders__element-delivery-status-${data.id}` }
-        >
-          {status}
-        </p>
-        <p
-          data-testid={ `customer_orders__element-order-date-${data.id}` }
-        >
-          {`${data.saleDate.slice(0, TEN).split('-').reverse().join('/')}`}
-        </p>
-        <p
-          data-testid={ `customer_orders__element-card-price-${data.id}` }
-        >
-          {`${data.totalPrice.replace('.', ',')}`}
-        </p>
       </div>
       <div className="half-data">
         <div className="half-data-status">
           <p
+            className={ statusColor() }
             data-testid={ `customer_orders__element-delivery-status-${data.id}` }
           >
             {status}

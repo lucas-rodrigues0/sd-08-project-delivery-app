@@ -40,15 +40,16 @@ function SellerDetailTable({ order }) {
                   `seller_order_details__element-order-table-unit-price-${i}`
                 }
               >
-                {element.product.price.replace('.', ',')}
+                { `R$ ${element.product.price.replace('.', ',')}` }
               </td>
               <td
                 data-testid={
                   `seller_order_details__element-order-table-sub-total-${i}`
                 }
               >
-                { (Number(element.quantity) * Number(element.product.price)).toFixed(2)
-                  .replace('.', ',')}
+                { `R$ ${(Number(element.quantity) * Number(element.product.price))
+                  .toFixed(2)
+                  .replace('.', ',')}` }
               </td>
             </tr>
           ))}
@@ -57,7 +58,7 @@ function SellerDetailTable({ order }) {
       <h4
         data-testid="seller_order_details__element-order-total-price"
       >
-        {order.totalPrice.replace('.', ',')}
+        { `R$ ${order.totalPrice.replace('.', ',')}` }
       </h4>
     </div>
   );

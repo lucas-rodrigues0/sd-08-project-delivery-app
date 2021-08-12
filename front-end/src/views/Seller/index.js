@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Context from '../../context/Context';
-import NavBar from '../Components/NavBar/index';
+import NavBar from '../Components/NavBar';
 import OrderDetailsCard from '../Components/OrderDetailCard';
+import './styles.css';
 
 function SellerOrders() {
   const { userData } = useContext(Context);
@@ -35,9 +36,16 @@ function SellerOrders() {
   }, [userData.token]);
 
   return (
-    <div>
+    <div className="main-wrapper-seller-orders">
       <NavBar userType="seller" userName={ userData.name } />
-      { orders.map((order) => <OrderDetailsCard key={ order.id } order={ order } />)}
+      { orders.map((order, index) => (
+        <div className="seller-orders" key={ index }>
+          <OrderDetailsCard
+            key={ order.id }
+            order={ order }
+          />
+        </div>
+      ))}
     </div>
   );
 }

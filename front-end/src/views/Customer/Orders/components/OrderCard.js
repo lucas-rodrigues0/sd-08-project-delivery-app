@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import './styles.css';
 import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = 'http://localhost:3001';
 
-function OrderCard({ data, index }) {
+function OrderCard({ data }) {
   const { id } = data;
   const [status, setStatus] = useState();
   console.log(status);
@@ -19,6 +19,12 @@ function OrderCard({ data, index }) {
   //   });
   // }, [socket, id]);
 
+  function statusColor() {
+    if (status === 'Pendente') return 'pendente';
+    if (status === 'entregue') return 'entregue';
+    return 'preparando';
+  }
+
   useEffect(() => {
     console.log('Execuet socket call');
     // socketCallBack();
@@ -30,44 +36,48 @@ function OrderCard({ data, index }) {
 
   const TEN = 10;
   return (
-    <Link to={ `/customer/orders/${data.id}` }>
-      <div
-        key={ index }
-        className="orders-cards"
-      >
+    <div className="main-wrapper-order">
+      <div className="order-number">
         <p
           data-testid={ `customer_orders__element-order-id-${data.id}` }
         >
           {`PEDIDO: ${data.id}`}
         </p>
-        <p
-          data-testid={ `customer_orders__element-delivery-status-${data.id}` }
-        >
-          {status}
-        </p>
-        <p
-          data-testid={ `customer_orders__element-order-date-${data.id}` }
-        >
-          {`${data.saleDate.slice(0, TEN).split('-').reverse().join('/')}`}
-        </p>
-        <p
-          data-testid={ `customer_orders__element-card-price-${data.id}` }
-        >
-          {`${data.totalPrice.replace('.', ',')}`}
-        </p>
+      </div>
+      <div className="half-data">
+        <div className="half-data-status">
+          <p
+            className={ statusColor() }
+            data-testid={ `customer_orders__element-delivery-status-${data.id}` }
+          >
+            {status}
+          </p>
+          <div className="date-valor">
+            <p
+              data-testid={ `customer_orders__element-order-date-${data.id}` }
+              className="date"
+            >
+              {data.saleDate.slice(0, TEN).split('-').reverse().join('/')}
+            </p>
+            <p
+              data-testid={ `customer_orders__element-card-price-${data.id}` }
+            >
+              {`R$ ${data.totalPrice.replace('.', ',')}`}
+            </p>
+          </div>
+        </div>
         <p
           data-testid={ `customer_orders__element-card-address-${data.id}` }
         >
-          {`ENDEREÇO: ${data.deliveryAddress}, ${data.deliveryNumber}`}
+          {`${data.deliveryAddress}, ${data.deliveryNumber}`}
         </p>
       </div>
-    </Link>
+    </div>
   );
 }
 
 OrderCard.propTypes = {
   data: PropTypes.arrayOf(Object).isRequired,
-  index: PropTypes.string.isRequired,
 };
 
 export default OrderCard;

@@ -14,6 +14,14 @@ function StatusNav({ orderData }) {
   const [status, setStatus] = useState();
   const socket = socketIOClient(ENDPOINT);
   const TEN = 10;
+  function statusColor() {
+    if (orderData.status === 'Pendente') {
+      return 'pendente';
+    }
+    if (orderData.status === 'Preparando') {
+      return 'preparando';
+    } return 'entregue';
+  }
 
   console.log('console', status);
 
@@ -29,11 +37,10 @@ function StatusNav({ orderData }) {
   function changeOrderStatus(newStatus) {
     socket.emit('clientSetOrderStatus', { id, status: newStatus });
   }
-
   return (
     orderData
       ? (
-        <div className="order-status">
+        <div className="order-detail-status">
           <p
             data-testid="customer_order_details__element-order-details-label-order-id"
           >
@@ -51,11 +58,13 @@ function StatusNav({ orderData }) {
               ? saleDate.slice(0, TEN).split('-').reverse().join('/') : null}
           </p>
           <p
+            className={ `status-label ${statusColor()}` }
             data-testid={ testIdData.deliveryStatus }
           >
             {status}
           </p>
           <button
+            className="order-detail-button"
             onClick={ () => changeOrderStatus('Entregue') }
             type="button"
             data-testid="customer_order_details__button-delivery-check"

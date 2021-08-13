@@ -1,4 +1,5 @@
-### OnZé Delivery project
+# OnZé Delivery project
+______________________________
 
 Projeto em grupo realizado para a conclusão do módulo de Back End do curso de Desenvolvimento Web Full Stack da Trybe.
 
